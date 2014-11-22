@@ -4,6 +4,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import common.CameraEffects;
 import common.GameScene;
+import objects.Ground;
 import objects.Player;
 
 /**
@@ -23,6 +24,7 @@ class Level extends GameScene
 		_camera = new CameraEffects();
 		
 		add(_player = new Player());
+		add(new Ground());
 		
 		super.begin();
 	}
@@ -31,5 +33,10 @@ class Level extends GameScene
 	{
 		_camera.update();
 		super.update();
+	}
+	
+	public function shake(amount:Float = 25.0)
+	{
+		_camera.startShake(amount);
 	}
 }

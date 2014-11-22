@@ -33,10 +33,9 @@ class Game extends Engine
 	
 	private function defineInputs()
 	{
-		Input.define("up",     [Key.UP,    Key.W]);
-		Input.define("down",   [Key.DOWN,  Key.S]);
-		Input.define("left",   [Key.LEFT,  Key.A]);
-		Input.define("right",  [Key.RIGHT, Key.D]);
-		Input.define("attack", [Key.SPACE, Key.X]);
+		Input.define("jump",  [Key.W]);
+		Input.define("duck",  [Key.S]);
+		Input.define("left",  [Key.A]);
+		Input.define("right", [Key.D]);
 	}
 }
