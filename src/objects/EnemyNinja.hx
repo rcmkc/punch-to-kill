@@ -20,6 +20,7 @@ class EnemyNinja extends Enemy
 	private var _throwDelay : Float;
 	
 	private var _jumpHeight : Float;
+	private var _specialJumpPos : Float;
 	private var _specialChance : Float;
 	private var _isSpecialAttack : Bool;
 	
@@ -55,17 +56,25 @@ class EnemyNinja extends Enemy
 		
 		if (_isSpecialAttack)
 		{
-			_speed = 0;
+			_speed = 400;
 			
-			// jump code should be here
-			// this is for testing
+			if (y > _specialJumpPos)
+			{
+				moveTowards(x, _specialJumpPos, _speed * HXP.elapsed);
+			}
 			
-			moveBy(0, -_jumpHeight);
-			specialAttack();
-			moveBy(0, _jumpHeight);
+			if (y == _specialJumpPos)
+			{
+				specialAttack();
+
+				// this is a temp hack, later fall down until collision with ground
+				moveBy(0, _jumpHeight);
+			}
 		}
-		
-		moveBy(_speed * HXP.elapsed, 0);
+		else
+		{
+			moveBy(_speed * HXP.elapsed, 0);
+		}
 	}
 	
 	public override function attack()
@@ -75,6 +84,7 @@ class EnemyNinja extends Enemy
 			if (!_isSpecialAttack && HXP.random < _specialChance)
 			{
 				_isSpecialAttack = true;
+				_specialJumpPos = y - _jumpHeight;
 			}
 			else
 			{
@@ -91,21 +101,15 @@ class EnemyNinja extends Enemy
 	private function specialAttack()
 	{
 		var throwables = new Array<ThrowObject>();
-				
-		throwables[0] = new ThrowObject(new Vector(_target.x, _target.y), 300);
-		throwables[0].x = x;
-		throwables[0].y = y;
-		scene.add(throwables[0]);
 		
-		throwables[1] = new ThrowObject(new Vector(_target.x + 100, _target.y), 300);
-		throwables[1].x = x;
-		throwables[1].y = y;
-		scene.add(throwables[1]);
-		
-		throwables[2] = new ThrowObject(new Vector(_target.x - 100, _target.y), 300);
-		throwables[2].x = x;
-		throwables[2].y = y;
-		scene.add(throwables[2]);
+		for (i in -1 ... 2)
+		{
+			HXP.log(""+i);
+			throwables[i + 1] = new ThrowObject(new Vector(_target.x + 100 * i, _target.y), 300);
+			throwables[i + 1].x = x;
+			throwables[i + 1].y = y;
+			scene.add(throwables[i + 1]);
+		}
 		
 		_isSpecialAttack = false;
 	}
