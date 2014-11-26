@@ -47,7 +47,7 @@ class EnemyThrower extends Enemy
 		if (_attackCooldown <= 0)
 		{
 			var throwable : ThrowObject;
-			throwable = new ThrowObject(new Vector(_target.x, _target.y), 300);
+			throwable = new ThrowObject(new Vector(_target.x, _target.y), 300, false);
 			throwable.x = x;
 			throwable.y = y;
 			scene.add(throwable);
