@@ -4,6 +4,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Text;
 import common.CameraEffects;
 import common.GameScene;
+import objects.Dummy;
 import objects.Ground;
 import objects.Player;
 
@@ -25,6 +26,8 @@ class Level extends GameScene
 		
 		add(_player = new Player());
 		add(new Ground());
+		
+		add(new Dummy(_player));
 		
 		super.begin();
 	}

@@ -37,5 +37,10 @@ class Game extends Engine
 		Input.define("duck",  [Key.S]);
 		Input.define("left",  [Key.A]);
 		Input.define("right", [Key.D]);
+		
+		Input.define("left_hit",   [Key.LEFT]);
+		Input.define("right_hit",  [Key.RIGHT]);
+		Input.define("up_hit",     [Key.UP]);
+		Input.define("down_hit",   [Key.DOWN]);
 	}
 }
